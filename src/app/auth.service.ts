@@ -12,7 +12,7 @@ export class AuthService {
 
   login(registrationNumber: string): Observable<any> {
     this.setRegNo(registrationNumber);
-    return this.http.post('http://localhost:3000/api/login', { registrationNumber });
+    return this.http.post('https://conference-backend-3nta.onrender.com/api/login', { registrationNumber });
   }
 
   setRegNo(id: string) {
