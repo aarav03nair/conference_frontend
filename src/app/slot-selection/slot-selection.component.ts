@@ -14,6 +14,7 @@ export class SlotSelectionComponent implements OnInit {
   numberOfSlots:Number=0;
   slots: any[]=[];
   alreadyExistFlag:boolean=true;
+  userName: string = '';  // Store user's name
 
   constructor(private slotService: SlotService, private authService: AuthService, private router:Router) {}
 
@@ -27,6 +28,7 @@ export class SlotSelectionComponent implements OnInit {
   // }
   ngOnInit() {
     const RegNo = this.authService.getRegNo();
+    this.userName = this.authService.getUserName();
 
     // Call to get the number of booked slots for the user
     this.slotService.userslotinfo(RegNo).subscribe(
@@ -61,11 +63,23 @@ export class SlotSelectionComponent implements OnInit {
     // alert(RegNo);
     console.log(this.selectedSlots);
    
-    this.slotService.bookSlots(RegNo, this.selectedSlots).subscribe(response => {
-      alert('Slots booked successfully!');
-      
-    });
-    this.router.navigate(['/login']);
+    this.slotService.bookSlots(RegNo, this.selectedSlots).subscribe(
+      (response) => {
+        // Success callback
+        alert('Slots booked successfully!');
+        this.router.navigate(['/login']);
+      },
+      (error) => {
+        // Error callback
+        if (error.status === 400 && error.error) {
+          // Show the error message from the backend
+          alert(error.error); 
+        } else {
+          // Show a generic error message for other statuses
+          alert('An unexpected error occurred. Please try again later.');
+        }
+      }
+    );
   }
   getSlotDetails(slotId: string) {
     

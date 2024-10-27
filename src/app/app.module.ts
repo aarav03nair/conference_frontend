@@ -7,12 +7,14 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { SlotSelectionComponent } from './slot-selection/slot-selection.component';
 import { AppRoutingModule } from './app-routing.module';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    SlotSelectionComponent
+    SlotSelectionComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

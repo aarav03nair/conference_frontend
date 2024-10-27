@@ -1,0 +1,30 @@
+<div class="admin-container">
+    <h2>User Management</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Registration Number</th>
+          <th>Name</th>
+          <th>Booked Slots</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.registrationNumber }}</td>
+          <td>{{ user.name || 'N/A' }}</td>
+          <td>
+            <ul>
+              <li *ngFor="let slot of user.bookedSlots">
+                {{ slot.day }} - {{ slot.room }} - {{ slot.time }}
+              </li>
+            </ul>
+          </td>
+          <td>
+            <button (click)="clearSlots(user.registrationNumber)">Clear</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

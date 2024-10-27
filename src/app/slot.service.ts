@@ -6,19 +6,20 @@ import { Observable } from 'rxjs';
 })
 export class SlotService {
   constructor(private http: HttpClient) {}
+  private apiUrl = 'http://localhost:3000/api';
 
   getAvailableSlots(): Observable<any> {
-    return this.http.get('https://conference-backend-3nta.onrender.com/api/slots');
+    return this.http.get(`${this.apiUrl}/slots`);
   }
 
   bookSlots(RegNo: string, selectedSlots: string[]): Observable<any> {
     // alert(RegNo);
-    return this.http.post('https://conference-backend-3nta.onrender.com/api/book-slot', { RegNo, selectedSlots });
+    return this.http.post(`${this.apiUrl}/book-slot`, { RegNo, selectedSlots });
   }
 
   userslotinfo(RegNo:String): Observable<any>{
     console.log("service called");
-    return  this.http.post<any[]>('https://conference-backend-3nta.onrender.com/api/user-slot-info', { RegNo});
+    return  this.http.post<any[]>(`${this.apiUrl}/user-slot-info`, { RegNo});
    
   }
 }
