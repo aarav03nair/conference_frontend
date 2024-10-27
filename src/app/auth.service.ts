@@ -15,7 +15,7 @@ export class AuthService {
 
   login(registrationNumber: string): Observable<any> {
     this.setRegNo(registrationNumber);
-    return this.http.post(`${apiUrl}/login`, { registrationNumber });
+    return this.http.post(`${this.apiUrl}/login`, { registrationNumber });
   }
 
   setRegNo(id: string) {
