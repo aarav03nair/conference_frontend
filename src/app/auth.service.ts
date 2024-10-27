@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/api';
+  private apiUrl = 'https://conference-backend-3nta.onrender.com';
   
   private RegNo: string = '';
   private userName: string = '';
