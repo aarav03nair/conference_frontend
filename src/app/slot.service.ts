@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 })
 export class SlotService {
   constructor(private http: HttpClient) {}
-  private apiUrl = 'http://localhost:3000/api';
+  private apiUrl = 'https://conference-backend-3nta.onrender.com';
 
   getAvailableSlots(): Observable<any> {
     return this.http.get(`${this.apiUrl}/slots`);
