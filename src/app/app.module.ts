@@ -8,6 +8,8 @@ import { LoginComponent } from './login/login.component';
 import { SlotSelectionComponent } from './slot-selection/slot-selection.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AdminComponent } from './admin/admin.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,12 @@ import { AdminComponent } from './admin/admin.component';
     AdminComponent
   ],
   imports: [
+    BrowserAnimationsModule, // Required animations module
+    ToastrModule.forRoot({
+      timeOut: 3000,  // Toasts will disappear after 3 seconds
+      positionClass: 'toast-top-right', // Toast position (you can change it)
+      preventDuplicates: true, // Prevent duplicate toasts
+    }),
     BrowserModule,
     FormsModule,
     HttpClientModule,

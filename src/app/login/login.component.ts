@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   registrationNumber = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router,private toastr: ToastrService) {}
 
   login() {
     
@@ -31,10 +32,10 @@ export class LoginComponent {
         // Error callback
         if (error.status === 400 && error.error) {
           // Show the error message from the backend
-          alert(error.error); 
+          this.toastr.error(error.error); 
         } else {
           // Show a generic error message for other statuses
-          alert('An unexpected error occurred. Please try again later.');
+          this.toastr.error('An unexpected error occurred. Please try again later.');
         }
       });
     }

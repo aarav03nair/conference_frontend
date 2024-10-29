@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-admin',
@@ -9,9 +10,10 @@ import { UserService } from '../user.service';
 export class AdminComponent implements OnInit{
   users: any[] = [];
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private toastr: ToastrService) {}
 
   ngOnInit(): void {
+    this.toastr.info('Testing toast notification');
     this.loadUsers();
   }
 
@@ -28,10 +30,13 @@ export class AdminComponent implements OnInit{
 
       this.userService.clearUserSlots(userId).subscribe(
         () => {
-          alert('User slots cleared successfully');
+          // alert('User slots cleared successfully');
+          this.toastr.success('User slots cleared successfully');
           this.loadUsers();  // Reload users to reflect changes
         },
-        (error) => console.error('Error clearing user slots:', error)
+        (error) => {console.error('Error clearing user slots:', error),
+          this.toastr.error('Failed to clear user slots');
+        }
       );
     }
   }
