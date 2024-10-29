@@ -65,10 +65,7 @@
   <h2>Select Your Conference Slots</h2>
 
   <!-- Toggle Buttons for Day Selection -->
-  <div class="day-toggle">
-    <button (click)="setDay('Day 1')" [class.active]="selectedDay === 'Day 1'">Day 1</button>
-    <button (click)="setDay('Day 2')" [class.active]="selectedDay === 'Day 2'">Day 2</button>
-  </div>
+ 
 
   <div *ngIf="!alreadyExistFlag" class="booked-slots">
     <h3>Your slots are already selected:</h3>
@@ -87,6 +84,23 @@
       </li>
     </ul>
   </div>
+
+  <div class="day-toggle">
+  <button 
+    (click)="setDay('Day 1')" 
+    [class.active]="selectedDay === 'Day 1'"
+    class="toggle-btn"
+  >
+    Day 1
+  </button>
+  <button 
+    (click)="setDay('Day 2')" 
+    [class.active]="selectedDay === 'Day 2'"
+    class="toggle-btn"
+  >
+    Day 2
+  </button>
+</div>
 
   <h2>Scheduled Slots for {{ selectedDay }}:</h2>
 
@@ -116,10 +130,29 @@
       </tr>
     </tbody>
   </table>
+  <!-- pattern="^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$" -->
+  <div class="form-group">
+    <label for="email" class="form-label">Enter Your Email:</label>
+    <input
+      type="email"
+      id="email"
+      [(ngModel)]="email"
+      required
+      #emailInput="ngModel"
+      class="form-control"
+    />
+    <div 
+      *ngIf="emailInput.invalid && emailInput.touched" 
+      class="error-message"
+    >
+      Please enter a valid email address.
+    </div>
+  </div>
 
   <button 
     class="btn-primary" 
-    [disabled]="selectedSlots.length !== 2" 
+    *ngIf="alreadyExistFlag"
+    [disabled]="selectedSlots.length !== 2 || !emailInput.valid" 
     (click)="bookSlots()">Book Selected Slots
   </button>
 </div>

@@ -112,7 +112,8 @@ export class SlotSelectionComponent implements OnInit {
   slots: any[] = [];
   alreadyExistFlag: boolean = true;
   selectedDay: string = 'Day 1'; // Default to Day 1
-
+  email: string = '';
+  
   constructor(private slotService: SlotService, private authService: AuthService, private router: Router, private toastr:ToastrService) {}
 
   ngOnInit() {
@@ -157,7 +158,7 @@ export class SlotSelectionComponent implements OnInit {
 
   bookSlots() {
     const RegNo = this.authService.getRegNo();
-    this.slotService.bookSlots(RegNo, this.selectedSlots).subscribe(
+    this.slotService.bookSlots(RegNo, this.selectedSlots,this.email).subscribe(
       () => {
         this.toastr.success('Slots booked successfully!');
         this.router.navigate(['/login']);
