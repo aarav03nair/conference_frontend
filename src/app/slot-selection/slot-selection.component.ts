@@ -117,7 +117,9 @@ export class SlotSelectionComponent implements OnInit {
   constructor(private slotService: SlotService, private authService: AuthService, private router: Router, private toastr:ToastrService) {}
 
   ngOnInit() {
-    const RegNo = this.authService.getRegNo();
+    // checkAndNavigate();
+    // const RegNo = this.authService.getRegNo();
+    const RegNo = localStorage.getItem('regNo')|| '';
     this.userName = this.authService.getUserName();
 
     this.slotService.userslotinfo(RegNo).subscribe(
@@ -157,10 +159,15 @@ export class SlotSelectionComponent implements OnInit {
   }
 
   bookSlots() {
-    const RegNo = this.authService.getRegNo();
+    const RegNo = localStorage.getItem('regNo')|| '';
+    // const regNo = localStorage.getItem('regNo');
+  // if (!RegNo || RegNo.trim() === '') {
+  //   this.router.navigate(['/login']);
+  // }
     this.slotService.bookSlots(RegNo, this.selectedSlots,this.email).subscribe(
       () => {
         this.toastr.success('Slots booked successfully!');
+        localStorage.removeItem('regNo');
         this.router.navigate(['/login']);
       },
       (error) => {

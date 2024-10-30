@@ -25,6 +25,7 @@ export class LoginComponent {
         console.log(user.name);
         this.authService.setUserName(user.name)
         if (user) {
+          localStorage.setItem('regNo', this.registrationNumber);
           this.router.navigate(['/select-slots']);
         }
       },
