@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
 
-  private apiUrl = 'https://conference-backend-r057.onrender.com/api';
-  // private apiUrl = 'http://localhost:3000/api';
+  // private apiUrl = 'https://conference-backend-r057.onrender.com/api';
+  private apiUrl = 'http://localhost:3000/api';
 
   constructor(private http: HttpClient) {}
 
