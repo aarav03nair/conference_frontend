@@ -14,9 +14,10 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(registrationNumber: string): Observable<any> {
+  login(registrationNumber: string, phoneNumber: string): Observable<any> {
+    console.log(phoneNumber,registrationNumber)
     this.setRegNo(registrationNumber);
-    return this.http.post(`${this.apiUrl}/login`, { registrationNumber });
+    return this.http.post<any>(`${this.apiUrl}/login`, { registrationNumber, phoneNumber });
   }
 
   setRegNo(id: string) {

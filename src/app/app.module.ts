@@ -10,13 +10,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AdminComponent } from './admin/admin.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SlotSelectionComponent,
-    AdminComponent
+    AdminComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserAnimationsModule, // Required animations module

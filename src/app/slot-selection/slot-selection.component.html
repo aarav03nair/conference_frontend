@@ -1,71 +1,12 @@
-<!-- <div class="slot-selection-container">
-  <h2>Welcome, {{ userName }}</h2>
-  <h2>Select Your Conference Slots</h2>
-
-  <div *ngIf="!alreadyExistFlag" class="booked-slots">
-    <h3>Your slots are already slected:</h3>
-    <ul>
-      <li *ngFor="let slot of slots">
-        {{ slot.day }} - {{ slot.room }} - {{ slot.time }}
-      </li>
-    </ul>
-  </div>
-
-  <div *ngIf="alreadyExistFlag" class="selected-slots">
-    <h3>Your Selected Slots:</h3>
-    <ul>
-      <li *ngFor="let slotId of selectedSlots">
-        {{ getSlotDetails(slotId)?.day }} - {{ getSlotDetails(slotId)?.room }} - {{ getSlotDetails(slotId)?.time }}
-      </li>
-    </ul>
-  </div>
-
-  <h2>Sheduled slots:</h2>
-
-
-  <table class="slots-list-table">
-    <thead>
-      <tr>
-        <th>Day</th>
-        <th>Room</th>
-        <th>Time</th>
-        <th>Booked</th>
-        <th *ngIf="alreadyExistFlag">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let slot of availableSlots" class="slot-item">
-        <td>{{ slot.day }}</td>
-        <td>{{ slot.room }}</td>
-        <td>{{ slot.time }}</td>
-        <td>{{ slot.bookedCount }} / {{ slot.capacity }}</td>
-        <td *ngIf="alreadyExistFlag">
-          <button 
-            class="slot-button" 
-            [disabled]="slot.bookedCount >= 20" 
-            [ngClass]="{'selected': selectedSlots.includes(slot._id)}"
-            (click)="toggleSlot(slot._id)">
-            {{ selectedSlots.includes(slot._id) ? 'Deselect' : 'Select' }}
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-
-
-  <button 
-    class="btn-primary" 
-    [disabled]="selectedSlots.length !== 2" 
-    (click)="bookSlots()">Book Selected Slots
-  </button>
-</div> -->
 <div class="slot-selection-container">
   <h2>Welcome, {{ userName }}</h2>
   <h2>Select Your Conference Slots</h2>
 
-  <!-- Toggle Buttons for Day Selection -->
- 
+  <!-- Day Toggle Buttons -->
+  <div class="day-toggle">
+    <button (click)="setDay('Day 1')" [class.active]="selectedDay === 'Day 1'" class="toggle-btn">Day 1</button>
+    <button (click)="setDay('Day 2')" [class.active]="selectedDay === 'Day 2'" class="toggle-btn">Day 2</button>
+  </div>
 
   <div *ngIf="!alreadyExistFlag" class="booked-slots">
     <h3>Your slots are already selected:</h3>
@@ -85,43 +26,26 @@
     </ul>
   </div>
 
-  <div class="day-toggle">
-  <button 
-    (click)="setDay('Day 1')" 
-    [class.active]="selectedDay === 'Day 1'"
-    class="toggle-btn"
-  >
-    Day 1
-  </button>
-  <button 
-    (click)="setDay('Day 2')" 
-    [class.active]="selectedDay === 'Day 2'"
-    class="toggle-btn"
-  >
-    Day 2
-  </button>
-</div>
-
-  <h2>Scheduled Slots for {{ selectedDay }}:</h2>
-
-  <table class="slots-list-table">
+  <!-- Hall 1 Table -->
+  <h3 *ngIf="getFilteredSlots('Hall 1').length > 0">Scheduled Slots for Hall 1 - {{ selectedDay }}:</h3>
+  <table class="slots-list-table" *ngIf="getFilteredSlots('Hall 1').length > 0">
     <thead>
       <tr>
-        <th>Room</th>
         <th>Time</th>
-        <th>Booked</th>
+        <th>Topic</th>
+        <th>Speaker</th>
         <th *ngIf="alreadyExistFlag">Action</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let slot of availableSlotsByDay" class="slot-item">
-        <td>{{ slot.room }}</td>
+      <tr *ngFor="let slot of getFilteredSlots('Hall 1')" class="slot-item">
         <td>{{ slot.time }}</td>
-        <td>{{ slot.bookedCount }} / {{ slot.capacity }}</td>
+        <td>{{ slot.topic }}</td>
+        <td>{{ slot.speakerName }}</td>
         <td *ngIf="alreadyExistFlag">
           <button 
             class="slot-button" 
-            [disabled]="slot.bookedCount >= 20" 
+            [disabled]="slot.bookedCount >= slot.capacity" 
             [ngClass]="{'selected': selectedSlots.includes(slot._id)}"
             (click)="toggleSlot(slot._id)">
             {{ selectedSlots.includes(slot._id) ? 'Deselect' : 'Select' }}
@@ -130,9 +54,67 @@
       </tr>
     </tbody>
   </table>
-  <!-- pattern="^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$" -->
-  <div class="form-group">
-    <label for="email" class="form-label">Enter Your Email:</label>
+
+  <!-- Hall 2 Table -->
+  <h3 *ngIf="getFilteredSlots('Hall 2').length > 0">Scheduled Slots for Hall 2 - {{ selectedDay }}:</h3>
+  <table class="slots-list-table" *ngIf="getFilteredSlots('Hall 2').length > 0">
+    <thead>
+      <tr>
+        <th>Time</th>
+        <th>Topic</th>
+        <th>Speaker</th>
+        <th *ngIf="alreadyExistFlag">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let slot of getFilteredSlots('Hall 2')" class="slot-item">
+        <td>{{ slot.time }}</td>
+        <td>{{ slot.topic }}</td>
+        <td>{{ slot.speakerName }}</td>
+        <td *ngIf="alreadyExistFlag">
+          <button 
+            class="slot-button" 
+            [disabled]="slot.bookedCount >= slot.capacity" 
+            [ngClass]="{'selected': selectedSlots.includes(slot._id)}"
+            (click)="toggleSlot(slot._id)">
+            {{ selectedSlots.includes(slot._id) ? 'Deselect' : 'Select' }}
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Hall 3 Table -->
+  <h3 *ngIf="getFilteredSlots('Hall 3').length > 0">Scheduled Slots for Hall 3 - {{ selectedDay }}:</h3>
+  <table class="slots-list-table" *ngIf="getFilteredSlots('Hall 3').length > 0">
+    <thead>
+      <tr>
+        <th>Time</th>
+        <th>Topic</th>
+        <th>Speaker</th>
+        <th *ngIf="alreadyExistFlag">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let slot of getFilteredSlots('Hall 3')" class="slot-item">
+        <td>{{ slot.time }}</td>
+        <td>{{ slot.topic }}</td>
+        <td>{{ slot.speakerName }}</td>
+        <td *ngIf="alreadyExistFlag">
+          <button 
+            class="slot-button" 
+            [disabled]="slot.bookedCount >= slot.capacity" 
+            [ngClass]="{'selected': selectedSlots.includes(slot._id)}"
+            (click)="toggleSlot(slot._id)">
+            {{ selectedSlots.includes(slot._id) ? 'Deselect' : 'Select' }}
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <div class="form-group" >
+    <label for="email" class="form-label" *ngIf="alreadyExistFlag">Enter Your Email:</label>
     <input
       type="email"
       id="email"
@@ -140,11 +122,9 @@
       required
       #emailInput="ngModel"
       class="form-control"
+      
     />
-    <div 
-      *ngIf="emailInput.invalid && emailInput.touched" 
-      class="error-message"
-    >
+    <div *ngIf="emailInput.invalid && emailInput.touched" class="error-message">
       Please enter a valid email address.
     </div>
   </div>
@@ -152,7 +132,8 @@
   <button 
     class="btn-primary" 
     *ngIf="alreadyExistFlag"
-    [disabled]="selectedSlots.length !== 2 || !emailInput.valid" 
+    [disabled]="selectedSlots.length !== 2 || emailInput.invalid" 
     (click)="bookSlots()">Book Selected Slots
   </button>
 </div>
+<app-loading *ngIf="loading"></app-loading>
