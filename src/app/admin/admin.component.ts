@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AdminComponent implements OnInit{
   users: any[] = [];
+  loading: boolean = false;;
 
   constructor(private userService: UserService, private toastr: ToastrService) {}
 
@@ -25,6 +26,7 @@ export class AdminComponent implements OnInit{
   }
 
   clearSlots(userId: string) {
+    this.loading = true; // Show loading overlay
     const confirmation = confirm(`Are you sure you want to clear the slots for username (Registration Number: ${userId})?`);
     if(confirmation){
 
@@ -32,6 +34,7 @@ export class AdminComponent implements OnInit{
         () => {
           // alert('User slots cleared successfully');
           this.toastr.success('User slots cleared successfully');
+          this.loading = false;
           this.loadUsers();  // Reload users to reflect changes
         },
         (error) => {console.error('Error clearing user slots:', error),
