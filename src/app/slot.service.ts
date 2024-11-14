@@ -23,4 +23,8 @@ export class SlotService {
     return  this.http.post<any[]>(`${this.apiUrl}/user-slot-info`, { RegNo});
    
   }
+  getUsersForSlot(day: string, room: string, time: string): Observable<any[]> {
+    const requestBody = { day, room, time };
+    return this.http.post<any[]>(`${this.apiUrl}/getUsersBySlot`, requestBody);
+  }
 }

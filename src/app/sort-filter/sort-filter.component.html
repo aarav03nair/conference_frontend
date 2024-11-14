@@ -1,0 +1,39 @@
+<div class="slot-selection-container">
+    <h2>Select a Slot</h2>
+
+    <div class="form-group">
+        <label class="form-label" for="day">Select Day:</label>
+        <select class="form-control" id="day" [(ngModel)]="day">
+            <option value="Saturday, 23rd November">Saturday, 23rd November</option>
+            <option value="Sunday, 24th November">Sunday, 24th November</option>
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label class="form-label" for="room">Select Hall:</label>
+        <select class="form-control" id="room" [(ngModel)]="room">
+            <option value="Hall 1">Hall 1</option>
+            <option value="Hall 2">Hall 2</option>
+            <option value="Hall 3">Hall 3</option>
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label class="form-label" for="time">Select Time:</label>
+        <select class="form-control" id="time" [(ngModel)]="time">
+            <option value="9:30 AM">9:30 AM</option>
+            <option value="11:30 AM">11:30 AM</option>
+            <option value="2:00 PM">2:00 PM</option>
+            <option value="4:00 PM">4:00 PM</option>
+        </select>
+    </div>
+
+    <button class="btn-primary" (click)="getUsers()">Get Users</button>
+
+    <div *ngIf="users.length > 0" class="user-list">
+        <h3>Users Who Booked This Slot:</h3>
+        <ul>
+            <li *ngFor="let user of users">{{ user.name }} - {{ user.registrationNumber }}</li>
+        </ul>
+    </div>
+</div>
