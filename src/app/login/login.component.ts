@@ -19,7 +19,10 @@ export class LoginComponent {
   ) {}
 
   login() {
-    if (this.registrationNumber === 'admin123') {
+    if (this.registrationNumber === 'hallmanager') {
+      this.router.navigate(['/filter-slots']);
+    }
+    else if (this.registrationNumber === 'admin123') {
       this.router.navigate(['/admin']);
     } else {
       // Pass both registrationNumber and phoneNumber to the login service
