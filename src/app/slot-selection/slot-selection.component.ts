@@ -68,8 +68,10 @@ export class SlotSelectionComponent implements OnInit {
       },
       (error) => {
         if (error.status === 400 && error.error) {
+          this.loading = false;
           this.toastr.error(error.error);
         } else {
+          this.loading = false;
           this.toastr.error('An unexpected error occurred. Please try again later.');
         }
       }
