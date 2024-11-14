@@ -14,7 +14,7 @@ export class SlotService {
   }
 
   bookSlots(RegNo: string, selectedSlots: string[], email: string): Observable<any> {
-    alert(RegNo);
+    // alert(RegNo);
     return this.http.post(`${this.apiUrl}/book-slot`, { RegNo, selectedSlots,email });
   }
 
