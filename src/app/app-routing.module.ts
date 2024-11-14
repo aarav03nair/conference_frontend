@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'select-slots', component: SlotSelectionComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'admin', component: AdminComponent },
-  { path: 'filter', component: SortFilterComponent },
+  { path: 'filter-slots', component: SortFilterComponent },
 ];
 
 @NgModule({
