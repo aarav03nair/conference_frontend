@@ -34,6 +34,8 @@ export class LoginComponent {
         (error) => {
           if (error.status === 400 && error.error) {
             this.toastr.error(error.error);
+          }else if(error.status === 402 && error.error){
+            alert('Phone number not provided for this registration number. please contact 9850575877 for this')
           } else {
             this.toastr.error('An unexpected error occurred. Please try again later.');
           }

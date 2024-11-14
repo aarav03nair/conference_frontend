@@ -1,11 +1,13 @@
+
+
 <div class="slot-selection-container">
   <h2>Welcome, {{ userName }}</h2>
   <h2>Select Your Conference Slots</h2>
 
   <!-- Day Toggle Buttons -->
   <div class="day-toggle">
-    <button (click)="setDay('Day 1')" [class.active]="selectedDay === 'Day 1'" class="toggle-btn">Day 1</button>
-    <button (click)="setDay('Day 2')" [class.active]="selectedDay === 'Day 2'" class="toggle-btn">Day 2</button>
+    <button (click)="setDay('Saturday, 23rd November')" [class.active]="selectedDay === 'Saturday, 23rd November'" class="toggle-btn">23rd Nov</button>
+    <button (click)="setDay('Sunday, 24th November')" [class.active]="selectedDay === 'Sunday, 24th November'" class="toggle-btn">24th Nov</button>
   </div>
 
   <div *ngIf="!alreadyExistFlag" class="booked-slots">

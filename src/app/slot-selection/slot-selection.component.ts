@@ -15,7 +15,7 @@ export class SlotSelectionComponent implements OnInit {
   userName: string = '';
   slots: any[] = [];
   alreadyExistFlag: boolean = true;
-  selectedDay: string = 'Day 1'; // Default to Day 1
+  selectedDay: string = 'Saturday, 23rd November'; // Default to Day 1
   email: string = '';
   loading: boolean = false;
 
