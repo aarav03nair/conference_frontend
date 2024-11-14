@@ -72,7 +72,8 @@ export class SlotSelectionComponent implements OnInit {
           this.toastr.error(error.error);
         } else {
           this.loading = false;
-          this.toastr.error('An unexpected error occurred. Please try again later.');
+          alert('An unexpected error occurred. Please try again later. contact 8983934493');
+          this.loading = false;
         }
       }
     );
