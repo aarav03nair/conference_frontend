@@ -28,7 +28,7 @@ import { SortFilterComponent } from './sort-filter/sort-filter.component';
     BrowserAnimationsModule, // Required animations module
     ToastrModule.forRoot({
       timeOut: 3000,  // Toasts will disappear after 3 seconds
-      positionClass: 'toast-top-right', // Toast position (you can change it)
+      positionClass: 'toast-bottom-right', // Toast position (you can change it)
       preventDuplicates: true, // Prevent duplicate toasts
     }),
     BrowserModule,
