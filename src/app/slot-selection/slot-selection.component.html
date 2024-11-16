@@ -50,7 +50,8 @@
             [disabled]="slot.bookedCount >= slot.capacity" 
             [ngClass]="{'selected': selectedSlots.includes(slot._id)}"
             (click)="toggleSlot(slot._id)">
-            {{ selectedSlots.includes(slot._id) ? 'Deselect' : 'Select' }}
+            <!-- {{ selectedSlots.includes(slot._id) ? 'Deselect' : 'Select' }} -->
+            {{ slot.bookedCount >= slot.capacity ? 'FULL' : (selectedSlots.includes(slot._id) ? 'Deselect' : 'Select') }}
           </button>
         </td>
       </tr>
