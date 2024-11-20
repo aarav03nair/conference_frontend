@@ -33,7 +33,7 @@
     <div *ngIf="users.length > 0" class="user-list">
         <h3>Users Who Booked This Slot:</h3>
         <ul>
-            <li *ngFor="let user of users">{{ user.name }} - {{ user.registrationNumber }}</li>
+            <li *ngFor="let user of users">{{ user.registrationNumber }} - {{ user.name }} - {{user.phoneNumber}} </li>
         </ul>
     </div>
 </div>
